@@ -14,6 +14,12 @@ public class Seller implements Serializable{
     private String email;
     private String password;
     private Date createAt;
+    private String urlImage;
+    private String otherField;
+
+
+    @OneToMany
+    List<Product> products;
 
 
 

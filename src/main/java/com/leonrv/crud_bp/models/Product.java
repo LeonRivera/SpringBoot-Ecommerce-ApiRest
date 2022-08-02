@@ -16,10 +16,11 @@ public class Product implements Serializable{
     private Double price;
     private Date createAt;
     private Integer quantity;
+    private String urlImage;
 
     @ManyToOne
     private Seller seller;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ImageProduct> images;
+    // @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    // private List<ImageProduct> images;
 }

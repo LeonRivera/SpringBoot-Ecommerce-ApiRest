@@ -14,6 +14,7 @@ public class Customer implements Serializable{
     private String email;
     private String password;
     private Date createAt;
+    private String urlImage;
 
     @OneToMany
     private List<Order> orders;

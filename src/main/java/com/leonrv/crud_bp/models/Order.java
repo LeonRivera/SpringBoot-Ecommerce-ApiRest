@@ -21,5 +21,5 @@ public class Order implements Serializable{
     private Customer customer;
 
     @ManyToMany
-    private List<Product> products;
+    private List<ProductOrder> productOrders;
 }
