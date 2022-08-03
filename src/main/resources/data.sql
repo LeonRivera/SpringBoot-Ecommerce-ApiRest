@@ -13,3 +13,18 @@ VALUES
 INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
 VALUES 
 ('CHE12345','Chetos Flamin Hot', 'Chetos con queso picante', 12.50,'2022-12-31 01:15:00', 20, 'https://http2.mlstatic.com/D_NQ_NP_849189-MLM50275681370_062022-O.webp', 1);
+INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
+VALUES 
+('CHE12345','Chetos Flamin Hot', 'Chetos con queso picante', 12.50,'2022-12-31 01:15:00', 20, 'https://http2.mlstatic.com/D_NQ_NP_849189-MLM50275681370_062022-O.webp', 1);
+INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
+VALUES 
+('CHE12345','Chetos Flamin Hot', 'Chetos con queso picante', 12.50,'2022-12-31 01:15:00', 20, 'https://http2.mlstatic.com/D_NQ_NP_849189-MLM50275681370_062022-O.webp', 1);
+INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
+VALUES 
+('CHE12345','Chetos Flamin Hot', 'Chetos con queso picante', 12.50,'2022-12-31 01:15:00', 20, 'https://http2.mlstatic.com/D_NQ_NP_849189-MLM50275681370_062022-O.webp', 1);
+INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
+VALUES 
+('CHE12345','Chetos Flamin Hot', 'Chetos con queso picante', 12.50,'2022-12-31 01:15:00', 20, 'https://http2.mlstatic.com/D_NQ_NP_849189-MLM50275681370_062022-O.webp', 1);
+INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
+VALUES 
+('CHE12345','Chetos Flamin Hot', 'Chetos con queso picante', 12.50,'2022-12-31 01:15:00', 20, 'https://http2.mlstatic.com/D_NQ_NP_849189-MLM50275681370_062022-O.webp', 1);

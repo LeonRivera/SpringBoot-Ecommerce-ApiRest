@@ -15,7 +15,6 @@ public class Seller implements Serializable{
     private String password;
     private Date createAt;
     private String urlImage;
-    private String otherField;
 
 
     @OneToMany
