@@ -71,6 +71,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.azure</groupId>
+			<artifactId>azure-storage-blob</artifactId>
+			<version>12.13.0</version>
+		 </dependency>
 	</dependencies>
 
 	<build>
@@ -95,9 +106,9 @@
 				<version>1.8.0</version>
 				<configuration>
 					<schemaVersion>v2</schemaVersion>
-					<resourceGroup>azureTestGroup</resourceGroup>
-					<appName>focsi-ecommerce</appName>
-					<region>West Europe</region>
+					<resourceGroup>TestLRV</resourceGroup>
+					<appName>fotsi-ecommerce-api</appName>
+					<region>Central US</region>
 					<pricingTier>F1</pricingTier>
 					<runtime>
 						<os>windows</os>

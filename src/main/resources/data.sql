@@ -21,7 +21,7 @@ VALUES
 ('CHE12345','Talavera Poblana', 'Talavera de puebla', 80,'2022-12-31 01:15:00', 20, 'https://www.infoceramica.com/wp-content/uploads/2013/11/Foto_6.jpg', 1);
 INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
 VALUES 
-('CHE12345','Sombrero de charro', 'Un sombre de charro de senderos', 500,'2022-12-31 01:15:00', 20, 'https://m.media-amazon.com/images/I/A12Cyo9b7tL._AC_SL1500_.jpg', 1);
+('CHE12345','Sombrero de charro', 'Un sombrero de charro de michoacan', 500,'2022-12-31 01:15:00', 20, 'https://m.media-amazon.com/images/I/A12Cyo9b7tL._AC_SL1500_.jpg', 1);
 INSERT INTO product(sku, name, description, price, create_at, quantity, url_image, seller_id)
 VALUES 
 ('CHE12345','Articulo de Fiesta', 'Articulo de fiesta artesanal', 142.99,'2022-12-31 01:15:00', 20, 'https://m.media-amazon.com/images/I/81IwISO791L._AC_SX425_.jpg', 1);
