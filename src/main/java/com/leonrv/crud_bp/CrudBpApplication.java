@@ -19,6 +19,6 @@ public class CrudBpApplication {
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void sendMail(){
-		senderService.sendEmail("leonriv2@gmail.com", "Prueba", "Hola esto es una prueba");
+		// senderService.sendEmail("leonriv2@gmail.com", "Prueba", "Hola esto es una prueba");
 	}
 }
