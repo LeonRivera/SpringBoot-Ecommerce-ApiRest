@@ -10,7 +10,9 @@ import com.leonrv.crud_bp.services.GenericService;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -26,13 +28,16 @@ public class CustomerController {
     @Autowired
     private AzureBlobService azureBlobAdapter;
 
-    GenericService<Customer, Long> service;
+    @Autowired
+    private CustomerService service;
 
-    public CustomerController(IGenericRepository<Customer, Long> repositoryCustomer) {
-        this.service = new GenericService<Customer, Long>(repositoryCustomer)
-        {
-        };
-    }
+    // GenericService<Customer, Long> service;
+
+    // public CustomerController(IGenericRepository<Customer, Long> repositoryCustomer) {
+    //     this.service = new GenericService<Customer, Long>(repositoryCustomer)
+    //     {
+    //     };
+    // }
 
     @GetMapping(produces = {"application/json"})
     public ResponseEntity<List<?>> findAll(){
@@ -45,6 +50,27 @@ public class CustomerController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable Long id){
         return ResponseEntity.ok(service.getById(id));
+    }
+
+    @GetMapping("email/{email}")
+    public ResponseEntity<?> getByEmail(@PathVariable String email){
+
+        Map<String, Object> responseMap = new HashMap<>();
+        
+        try{
+
+            Customer customer = service.findByEmail(email);
+
+            System.out.println(customer);
+
+            if(customer == null){
+                responseMap.put("message", "El usuario no se encuentra registrado");
+                return new ResponseEntity<Map<String,Object>>(responseMap, HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+            return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<String>("ha ocurrido un error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PutMapping("")

@@ -1,7 +1,10 @@
 package com.leonrv.crud_bp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,26 +17,47 @@ import com.leonrv.crud_bp.services.PaypalService;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-
 @RestController
-@RequestMapping("api/v1/services/paypal")
+@RequestMapping("api/v1/services/paypal")  @CrossOrigin("*")
+// @CrossOrigin("*")
 public class PaypalController {
 
     @Autowired
     PaypalService service;
 
-    public static final String SUCCESS_URL = "pay/success";
-    public static final String CANCEL_URL = "pay/cancel";
+    public   String SUCCESS_URL = "";
+    public   String CANCEL_URL = "";
+    public static final String ENV = "prod";
+
+    public PaypalController(){
+        if(ENV.equals("prod")){
+            this.SUCCESS_URL = "https://focsi.azurewebsites.net/?success=true";
+            this.CANCEL_URL = "https://focsi.azurewebsites.net/?success=false";
+        }else{
+            this.SUCCESS_URL = "http://localhost:4200/?success=true";
+            this.CANCEL_URL = "http://localhost:4200/?success=false";
+        }
+    }
 
    
     @PostMapping
-    public String payment() {
+    public ResponseEntity<?> payment(@RequestParam(required = false) String total, 
+    @RequestParam(required = false)  String currency, 
+    @RequestParam(required = false)  String method, 
+    @RequestParam(required = false)  String description) {
         try {
-            Payment payment = service.createPayment(2000.0, "USD", "paypal",
-                    "sale", "intento de pago",  "/failpayment" ,"/succespayment");
+
+            // System.out.println(total);
+            // System.out.println(method);
+            // System.out.println(currency);
+            // System.out.println(description);
+            Payment payment = service.createPayment(Double.valueOf(total), currency, method,
+                    "sale", description, CANCEL_URL ,SUCCESS_URL);
+            // Payment payment = service.createPayment(1.0, "MXN", "paypal",
+            //         "sale", "descripcion", CANCEL_URL ,SUCCESS_URL);
             for (Links link : payment.getLinks()) {
                 if (link.getRel().equals("approval_url")) {
-                    return link.getHref();
+                    return new ResponseEntity<String>(link.getHref(), HttpStatus.OK);
                 }
             }
 
@@ -41,25 +65,25 @@ public class PaypalController {
 
             e.printStackTrace();
         }
-        return "fail";
+        return new ResponseEntity<String>("an error has ocurred", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping(value = CANCEL_URL)
-    public String cancelPay() {
-        return "cancel";
+    @GetMapping("/failure")
+    public ResponseEntity<?> cancelPay() {
+        return new ResponseEntity<String>("cancelled", HttpStatus.OK);
     }
 
-    @GetMapping(value = "/succespayment")
-    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    @GetMapping(value = "/success")
+    public ResponseEntity<?> successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
         try {
             Payment payment = service.executePayment(paymentId, payerId);
             System.out.println(payment.toJSON());
             if (payment.getState().equals("approved")) {
-                return "success";
+                return new ResponseEntity<String>("success", HttpStatus.OK);
             }
         } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());
         }
-        return "fail";
+        return new ResponseEntity<String>("failure pay", HttpStatus.OK);
     }
 }
